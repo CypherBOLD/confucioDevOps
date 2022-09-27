@@ -64,7 +64,7 @@
     - name: remover pasta tizu da home
       become: true
       shell:
-        cmd: rm -rf /home/ubuntu/tizu
+        cmd: rm -rf /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
   # Fim
 
 - hosts: backend
@@ -74,9 +74,9 @@
   - name: Clonando o Repositorio do Projeto Ecommerce em JAVA
     ansible.builtin.git:
       # o repositório que vamos clonar
-      repo: https://github.com/cypherbold/tizu
+      repo: https://github.com/cypherbold/  # definir o repositorio do backend
       # onde vamos clonar
-      dest: /home/ubuntu/tizu
+      dest: /home/ubuntu/"nomedodestino" # mesmo nome do repositorio
       # qual é a branch que vamos clonar
       version: main
       # aqui estopu dizendo que quero seja feito update sempre que rodar a tarefa
@@ -87,11 +87,11 @@
   - name: mvn install
     shell:
       cmd: "sudo mvn install"
-      chdir: /home/ubuntu/tizu
+      chdir: /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
   # 3
   - name: Rodando docker-compose mysql
     become: true
     shell:
       cmd: "docker-compose -f docker-compose-mysql.yml up -d"
-      chdir: /home/ubuntu/tizu
+      chdir: /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
   # Fim
