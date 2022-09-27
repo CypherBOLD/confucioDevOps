@@ -105,16 +105,19 @@ vpc_security_group_ids = ["${aws_security_group.sg_acesso_ssh_local.id}","${aws_
 
 ### Inventory
 - Trocado o hostname (backend/frontend)
-> alterar os ip das instancias
+> alterar os `ip das instancias`
 
 ### playbook.yaml
 - instala todas as dependencias e sobe o container `mysql` no `backend`
-> alterar o diretorio padrao nas linhas : 70, 81 e 87
+> alterar o diretorio padrao nas linhas : `67, 79, 90 e 96`
+> alterar o repositorio na linha `77`
 
 ### backdocker.yaml
 - Sobe o container da aplicacao java no `backend`
->  alterar o nome da pasta na linha 8, para a que esta sendo usada no `playbook` linha 70
-```       chdir: /home/ubuntu/tizu ```
+>  alterar o nome da pasta na linha 8, para a que esta sendo usada no `playbook` linha 79
+```
+/home/ubuntu/"nomedodestino"
+```
 
 ### Portainer.yaml
 - Instala o Portainer em todas as instancias, para que possa gerenciar os containers pelo navegador (um docker-desktop para web)
