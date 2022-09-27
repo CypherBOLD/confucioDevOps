@@ -123,7 +123,7 @@ vpc_security_group_ids = ["${aws_security_group.sg_acesso_ssh_local.id}","${aws_
 - Instala o Portainer em todas as instancias, para que possa gerenciar os containers pelo navegador (um docker-desktop para web)
 > Para acessar, digitar `http:// ip da instancia :9443`
 
-# Comandos do Terraform, [utilizados na sua Maquina]
+# Comandos do Terraform, - utilizados na sua Maquina
 
 1 - Iniciar o terraform na pasta
 ```
@@ -173,27 +173,33 @@ terraform apply
 ```
  
 
-# Comandos do Ansible, [tilizados na maquina de gerenciamento]
+# Comandos do Ansible, utilizados na maquina de gerenciamento
 1 - Copiar a pasta ansible na maquina de gerenciamento, (pode usar o vscode, conectado por ssh)
 
 2 - entrar na pasta ansible
 ```
 cd ansible/
 ```
+3 - Copiar a chave para a maquina de gerenciamento
 
-3 - instala as dependencias e e subir o mysql
+4 - Definir chave apenas como leitura
+```
+chmod 400 terraform-aws # ou o nome da sua chave
+```
+
+5 - instala as dependencias e e subir o mysql
 ```
  ansible-playbook playbook.yaml -i inventory
 ```
 
-4 - conectar o container do mysql no workbench pelo ip `ip_da_instancia:3306` , e criar as tabelas e adicionar os dados, com o script `create.sql` na branch `main`
+6 - conectar o container do mysql no workbench pelo ip `ip_da_instancia:3306` , e criar as tabelas e adicionar os dados
 
-5 - subir o container do backend depois de o container do mysql estar online :
+7 - subir o container do backend depois de o container do mysql estar online :
 ```  
 ansible-playbook backdocker.yaml -i inventory 
 ```
 
-6 - Instalar o Portainer em todas as instancias
+8 - Instalar o Portainer em todas as instancias
 ```
 ansible-playbook portainer.yaml -i inventory 
 ```
