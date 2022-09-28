@@ -11,13 +11,13 @@ services:
       - volnode:/home/node/app
     ports:
       - "80:5173"
-    networks:
-      - servers
+    # networks:
+    #   - servers
     command: "npm run dev"
 
 volumes:
   volnode:
 
-networks:
-  servers:
-    driver: bridge
+# networks:
+#   servers:
+#     driver: bridge

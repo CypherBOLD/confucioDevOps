@@ -15,20 +15,20 @@
       # force pq eu quero, baixa e pronto. eu mandei.
       force: yes
   # 2
-  - name: node curl nodesource
-    shell:
-      cmd: "curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh"
-      chdir: /home/ubuntu/frontend # mesma pasta da linha 79
-  # 3
-  - name: run shellscript nodesource_setup.sh
-    shell:
-      cmd: "sudo bash nodesource_setup.sh"
-      chdir: /home/ubuntu/frontend # mesma pasta da linha 79
-  # 4 sudo apt install nodejs
-  - name: install nodejs
-    shell:
-      cmd: "apt install nodejs"
-      chdir: /home/ubuntu/frontend # mesma pasta da linha 79
+  # - name: node curl nodesource
+  #   shell:
+  #     cmd: "curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh"
+  #     chdir: /home/ubuntu/frontend # mesma pasta da linha 79
+  # # 3
+  # - name: run shellscript nodesource_setup.sh
+  #   shell:
+  #     cmd: "sudo bash nodesource_setup.sh"
+  #     chdir: /home/ubuntu/frontend # mesma pasta da linha 79
+  # # 4 sudo apt install nodejs
+  # - name: install nodejs
+  #   shell:
+  #     cmd: "apt install nodejs"
+  #     chdir: /home/ubuntu/frontend # mesma pasta da linha 79
   # 5    
   - name: Rodando docker-compose mysql
     become: true
