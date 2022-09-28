@@ -1,11 +1,11 @@
 - hosts: all
   become: yes #vira sudo sempre que precisar
   tasks:
-  - name: alterando nome dos hosts
+  - name: "System : alterando nome dos hosts"
     hostname:
       name: "{{ new_hostname }}"
-  # 1
-  - name: instalar dependencias do docker e java para compilar
+  # 1 Instalacao das dependencias no sistema em todos os hosts
+  - name: "System : instalar dependencias do docker e java para compilar"
     apt: # apt-get install apt-transport-https 
       name: "{{item}}"
       state: present 
@@ -18,18 +18,20 @@
       - software-properties-common
       - openjdk-17-jdk
       - maven  
-  # 2
-  - name: adicionar chave GPG
+  # Fim 
+
+  # 1 - Instalacao do Docker em todos os hosts
+  - name: "Docker : adicionar chave GPG"
     apt_key:
       url: https://download.docker.com/linux/ubuntu/gpg
       state: present
-  # 3
-  - name: adicionar repositório d0 instalador do docker
+  # 2
+  - name: "Docker : adicionar repositório do instalador"
     apt_repository:
       repo: deb https://download.docker.com/linux/ubuntu bionic stable
       state: present
-  # 4
-  - name: instala docker
+  # 2
+  - name: "Docker : instalacao"
     apt:
       name: "{{item}}"
       state: latest
@@ -39,8 +41,8 @@
       - docker-ce-cli
       - containerd.io
       - docker-compose
-  # 5
-  - name: instalar python e pip ansible precisa para poder iniciar o Docker, executar
+  # 3
+  - name: "Docker : instalar python e pip, Ansible precisa para poder iniciar e executar o Docker"
     apt:
       name: "{{item}}"
       state: latest
@@ -48,50 +50,51 @@
     loop:
       - python3
       - pip
-  # 6
-  - name: Instalar recurso docker que o ansible precisa
+  # 4
+  - name: " Docker : Instalar recurso que o ansible  precisa para o docker"
     pip:
       name: docker
-  # Fim
+  # Fim instalacao Docker em todos os hosts
+
+  # # 1 - Inicio Instalacao Node
+  # - name: "Node : adicionar chave GPG"
+  #   apt_key:
+  #     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+  #     state: present
+  # # 3
+  # - name: adicionar repositório d0 instalador do docker
+  #   apt_repository:
+  #     repo: deb https://deb.nodesource.com/node_18.x bionic main
+  #     state: present
+  # # 4
+  # - name: "Node : Instalacao"
+  #   apt:
+  #     name: "{{item}}"
+  #     state: latest
+  #     update_cache: yes
+  #   loop:
+  #     - nodejs
+  # # Fim
 
   handlers:
   # 1
-    - name: reiniciar docker
+    - name: "System : reiniciar o Docker"
       service: 
         name: docker 
         state: restarted
   # 2
-    - name: remover pasta tizu da home
-      become: true
-      shell:
-        cmd: rm -rf /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
-  # Fim
-
-- hosts: backend
-  become: yes
-  tasks:
-  # 1
-  - name: Clonando o Repositorio do Projeto Ecommerce em JAVA
-    ansible.builtin.git:
-      # o repositório que vamos clonar
-      repo: https://github.com/cypherbold/  # definir o repositorio do backend
-      # onde vamos clonar
-      dest: /home/ubuntu/"nomedodestino" # mesmo nome do repositorio
-      # qual é a branch que vamos clonar
-      version: main
-      # aqui estopu dizendo que quero seja feito update sempre que rodar a tarefa
-      update: yes
-      # force pq eu quero, baixa e pronto. eu mandei.
-      force: yes
-  # 2
-  - name: mvn install
-    shell:
-      cmd: "sudo mvn install"
-      chdir: /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
-  # 3
-  - name: Rodando docker-compose mysql
-    become: true
-    shell:
-      cmd: "docker-compose -f docker-compose-mysql.yml up -d"
-      chdir: /home/ubuntu/"nomedodestino" # mesma pasta da linha 79
+    - name: "System : reiniciar o nodejs"
+      service: 
+        name: nodejs
+        state: restarted
+  # 3 
+  #   - name: "System : remover pasta frontend da home"
+  #     become: true
+  #     shell:
+  #       cmd: rm -rf /home/ubuntu/frontend
+  # # 4
+  #   - name: "System : remover pasta backend da home"
+  #     become: true
+  #     shell:
+  #       cmd: rm -rf /home/ubuntu/backend 
   # Fim

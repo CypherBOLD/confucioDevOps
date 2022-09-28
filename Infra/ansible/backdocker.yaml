@@ -1,8 +1,0 @@
-- hosts: backend
-  become: yes
-  tasks:        
-  - name: Subir docker-compose backend
-    become: true
-    shell:
-      cmd: "docker-compose -f docker-compose.yml up -d"
-      chdir: /home/ubuntu/"nomedodestino" # mesma pasta da linha 79 no playbook.yaml

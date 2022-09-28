@@ -1,6 +1,6 @@
 [docker]
-frontend ansible_host=10.0.1.65 new_hostname=frontend
-backend ansible_host=10.0.1.203 new_hostname=backend
+frontend ansible_host=10.0.1.X new_hostname=frontend
+backend ansible_host=10.0.1.X new_hostname=backend
 
 # [frontend]
 # docker0 ansible_host=10.0.1.90
