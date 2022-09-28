@@ -4,8 +4,6 @@ services:
   portainer:
     image: "portainer/portainer-ce:2.9.3"
     container_name: portainer
-    environment:
-      - NODE_ENV=production
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -17,4 +15,3 @@ services:
 volumes:
   portainer_data:
   /var/run/docker.sock:
-

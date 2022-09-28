@@ -11,4 +11,3 @@ ADD https://github.com/DH-Sports-Ecommerce/DH_Ecommerce_Back_End/raw/issue17/tar
 #comando especial para fazer o java rodar meu projeto no momento que o container é criado
 # ENTRYPOINT ["java", "-jar", "ecommerce.jar"]
 ENTRYPOINT ["java", "-Dspring.profiles.active=docker","-jar", "ecommerce.jar"]
-
