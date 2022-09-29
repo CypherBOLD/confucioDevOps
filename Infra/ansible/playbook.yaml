@@ -56,26 +56,6 @@
       name: docker
   # Fim instalacao Docker em todos os hosts
 
-  # # 1 - Inicio Instalacao Node
-  # - name: "Node : adicionar chave GPG"
-  #   apt_key:
-  #     url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-  #     state: present
-  # # 3
-  # - name: adicionar repositório d0 instalador do docker
-  #   apt_repository:
-  #     repo: deb https://deb.nodesource.com/node_18.x bionic main
-  #     state: present
-  # # 4
-  # - name: "Node : Instalacao"
-  #   apt:
-  #     name: "{{item}}"
-  #     state: latest
-  #     update_cache: yes
-  #   loop:
-  #     - nodejs
-  # # Fim
-
   handlers:
   # 1
     - name: "System : reiniciar o Docker"
@@ -87,14 +67,3 @@
       service: 
         name: nodejs
         state: restarted
-  # 3 
-  #   - name: "System : remover pasta frontend da home"
-  #     become: true
-  #     shell:
-  #       cmd: rm -rf /home/ubuntu/frontend
-  # # 4
-  #   - name: "System : remover pasta backend da home"
-  #     become: true
-  #     shell:
-  #       cmd: rm -rf /home/ubuntu/backend 
-  # Fim
