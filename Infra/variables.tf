@@ -1,5 +1,5 @@
 variable "usuario" {
-    default = "confucioDevOps"
+    default = "kinglionsport"
 }
 variable "regiao" {
      default = "us-west-1"
